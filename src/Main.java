@@ -33,6 +33,7 @@ public class Main {
         clientOS = scanner.nextInt();
         System.out.print("Введите год создания смартфона ");
         int clientDeviceYear = scanner.nextInt();
+        System.out.println("if-else");
         if (clientDeviceYear >= 2015  && clientDeviceYear <= 2025) {
             if (clientOS == 0) {
                 System.out.println("Установите версию приложения для iOS по ссылке");
@@ -53,6 +54,7 @@ public class Main {
             System.out.println("Неверная дата выпуска");
         }
         //Можно извратиться и с переключателем, но без if-else тут не обойтись)):
+        System.out.println("switch-case");
         switch (clientOS) {
             case 0:
                 if (clientDeviceYear >= 2015  && clientDeviceYear <= 2025) {
