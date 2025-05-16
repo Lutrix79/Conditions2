@@ -41,9 +41,7 @@ public class Main {
             } else {
                 System.out.println("Для такой ОС у нас нет приложения (((");
             }
-        } else if (clientDeviceYear > 2025){
-            System.out.println("В будущее глядеть могут не только лишь все, точнее мало кто может");
-        } else if (clientDeviceYear < 2015  && clientDeviceYear >= 2000) {
+        } else if (clientDeviceYear >= 2000 && clientDeviceYear < 2015) {
             if (clientOS == 0)  {
                 System.out.println("Установите облегченную версию приложения для iOS по ссылке");
             } else if (clientOS == 1) {
@@ -52,33 +50,29 @@ public class Main {
                 System.out.println("Для такой ОС у нас нет приложения (((");
             }
         } else {
-            System.out.println("Выкиньте телефон");
+            System.out.println("Неверная дата выпуска");
         }
         //Можно извратиться и с переключателем, но без if-else тут не обойтись)):
-        if (clientDeviceYear >= 2015  && clientDeviceYear <= 2025) {
-            switch (clientOS) {
-                case 0:
+        switch (clientOS) {
+            case 0:
+                if (clientDeviceYear >= 2015  && clientDeviceYear <= 2025) {
                     System.out.println("Установите версию приложения для iOS по ссылке");
-                    break;
-                case 1:
-                    System.out.println("Установите версию приложения для Android по ссылке");
-                    break;
-                default: System.out.println("Для такой ОС у нас нет приложения (((");
-            }
-        } else if (clientDeviceYear > 2025){
-            System.out.println("В будущее глядеть могут не только лишь все, точнее мало кто может");
-        } else if (clientDeviceYear < 2015  && clientDeviceYear >= 2000) {
-            switch (clientOS) {
-                case 0:
+                } else if (clientDeviceYear >= 2000  && clientDeviceYear < 2015) {
                     System.out.println("Установите облегченную версию приложения для iOS по ссылке");
-                    break;
-                case 1:
+                } else {
+                    System.out.println("Неверная дата выпуска");
+                }
+                break;
+            case 1:
+                if (clientDeviceYear >= 2015  && clientDeviceYear <= 2025) {
+                    System.out.println("Установите версию приложения для Android по ссылке");
+                } else if (clientDeviceYear >= 2000 && clientDeviceYear < 2015) {
                     System.out.println("Установите облегченную версию приложения для Android по ссылке");
-                    break;
-                default: System.out.println("Для такой ОС у нас нет приложения (((");
-            }
-        } else {
-            System.out.println("Выкиньте телефон");
+                } else {
+                    System.out.println("Неверная дата выпуска");
+                }
+                break;
+            default: System.out.println("Для такой ОС у нас нет приложения (((");
         }
 
         System.out.println();
@@ -88,12 +82,8 @@ public class Main {
         int year = scanner.nextInt();
         if (year < 1584) {
             System.out.println("Начиная с 1584 года, в григорианском календаре были введены високосные года");
-        } else if (year % 100 == 0) {
-            if (year % 400 != 0) {
-                System.out.println(year + " год не является високосным");
-            } else {
-                System.out.println(year + " год является високосным");
-            }
+        } else if ((year % 100 == 0) &&  (year % 400 != 0)) {
+            System.out.println(year + " год не является високосным");
         } else if (year % 4 == 0) {
             System.out.println(year + " год является високосным");
         } else System.out.println(year + " год не является високосным");
@@ -103,21 +93,18 @@ public class Main {
         System.out.println();
         //Задача №4
         System.out.println("Задача 4");
-        System.out.print("Введите расстояние до адреса доставки в км ");
+        System.out.print("Введите расстояние до адреса доставки клиенту карты банка в км ");
         int deliveryDistance = scanner.nextInt();
-        if (deliveryDistance >= 0){
-            int requireDays; //Требуемые дни для доставки
-            if (deliveryDistance <= 20) {
-                requireDays = 1;
-                System.out.println("Потребуется дней: " + requireDays);
-            } else if (deliveryDistance > 20 && deliveryDistance <= 60) {
-                requireDays = 2 + deliveryDistance / 20;
-                System.out.println("Потребуется дней: " + requireDays);
-            } else if (deliveryDistance > 60 && deliveryDistance <= 100) {
-                requireDays = 3 + deliveryDistance / 20;
-                System.out.println("Потребуется дней: " + requireDays);
-            } else System.out.println("Доставка карты производится в пределах 100км");
-        } else System.out.println("У нас не мультивселенная");
+        int requireDays = deliveryDistance / 20; //Требуемые дни для доставки без учета доп суток
+        if (deliveryDistance <= 20 && deliveryDistance >= 0) {
+            System.out.println("Потребуется дней: " + (requireDays + 1));
+        } else if (deliveryDistance > 20 && deliveryDistance <= 60) {
+            System.out.println("Потребуется дней: " + (requireDays + 2));
+        } else if (deliveryDistance > 60 && deliveryDistance <= 100) {
+            System.out.println("Потребуется дней: " + (requireDays + 3));
+        } else if (deliveryDistance < 0) {
+            System.out.println("У нас не мультивселенная");
+        } else System.out.println("Доставка карты производится в пределах 100км");
 
         System.out.println();
         //Задача №5
